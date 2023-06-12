@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,get_user_model,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from .models import Contact
 
 
 def index(request):
@@ -61,4 +62,15 @@ def login_1(request):
 
 
 
+def contact(request):
+    if request.method == 'POST':
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        message = request.POST['message']
 
+        contactform = Contact(firstname=firstname,lastname=lastname,email=email,phone=phone,message=message)
+        contactform.save()
+
+    return render(request, "web/contact.html")

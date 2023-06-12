@@ -56,7 +56,7 @@
                     <div class="footer-logo">
                         <div class="theme-logo">
                             <a href="index-2.html">
-                                <img src="../assets/images/logo/1.png" class="blur-up lazyload" alt="">
+                                <img src="{% static 'web/images/logo/1.png' %}" class="blur-up lazyload" alt="">
                             </a>
                         </div>
 
@@ -115,19 +115,19 @@
                     <div class="footer-contain">
                         <ul>
                             <li>
-                                <a href="index-2.html" class="text-content">Home</a>
+                                <a href="{% url 'web:home' %}" class="text-content">Home</a>
                             </li>
                             <li>
                                 <a href="shop-left-sidebar.html" class="text-content">Shop</a>
                             </li>
                             <li>
-                                <a href="about-us.html" class="text-content">About Us</a>
+                                <a href="{% url 'web:about' %}" class="text-content">About Us</a>
                             </li>
                             <li>
                                 <a href="blog-list.html" class="text-content">Blog</a>
                             </li>
                             <li>
-                                <a href="contact-us.html" class="text-content">Contact Us</a>
+                                <a href="{% url 'web:contact' %}" class="text-content">Contact Us</a>
                             </li>
                         </ul>
                     </div>
