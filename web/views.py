@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,get_user_model,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from .models import Contact
+from .models import Contact,Testimonial,Blog
+
 
 
 def index(request):
@@ -18,7 +19,11 @@ def index(request):
 
 
 def about(request):
-    context = {"is_about": True}
+    context = {"is_about": True,
+               
+               'testimonial' :Testimonial.objects.all(),
+               'blog':Blog.objects.all()
+               }
     
     return render(request, "web/about.html", context)
 
@@ -74,3 +79,20 @@ def contact(request):
         contactform.save()
 
     return render(request, "web/contact.html")
+
+def shop (request):
+    context={"is_shop": True}
+    return render (request,'web/shop.html',context)
+
+
+
+# def blog_detail (request):
+#     context={}
+#     return render(request,'web/blog-detail.html',context)
+
+def blog_detail(request,id):
+    blog=Blog.objects.get(id=id)
+    context={
+        'blog':blog,
+    }
+    return render(request,"web/blog-detail.html",context)

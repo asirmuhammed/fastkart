@@ -1,0 +1,62 @@
+{% extends 'web/partials/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Blog Details Section Start -->
+    <section class="blog-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                
+
+                <div class="col-xxl-9 col-xl-8 col-lg-7 ratio_50">
+                    <div class="blog-detail-image rounded-3 mb-4">
+                        <img src="{{blog.image.crop.700x438}}" class="bg-img blur-up lazyload" alt="">
+                        <div class="blog-image-contain">
+                            <ul class="contain-list">
+                                <li>backpack</li>
+                                <li>life style</li>
+                                <li>organic</li>
+                            </ul>
+                            <h2>{{blog.title}}</h2>
+                            <ul class="contain-comment-list">
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="user"></i>
+                                        <span>Caroline</span>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="calendar"></i>
+                                        <span>{{obj.date}}</span>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="message-square"></i>
+                                        <span>82 Comment</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="blog-detail-contain">
+                        <p>{{blog.content|safe}}</p>
+                    </div>
+
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+
+{% endblock  %}
+
+    
