@@ -56,10 +56,32 @@ class Blog(models.Model):
     title=models.CharField(max_length=225)
     summary=models.CharField(max_length=30)
     date = models.DateField(auto_now=True)
-    image = VersatileImageField('Image',upload_to='update/',ppoi_field='ppoi')
+    image = VersatileImageField('blog_Image',upload_to='update/')
     ppoi = PPOIField('Image PPOI')
     content= HTMLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
+    
+    
+class Product (models.Model):
+    class CategoryChoices(models.TextChoices):
+        VegitablesFruits ="Vegitables & Fruits"
+        MeatsSeafood  ="MeatsSeafood"
+        BreakfastDairy ="BreakfastDairy"
+        FrozenFood = "FrozenFood"
+        
+        
+        
+    product_name=models.CharField(max_length=60)
+    product_weight=models.CharField(max_length=30)
+    image = VersatileImageField('Image',upload_to='update/')
+    # product_category=Product.objects.filter(category='')
+    category= models.CharField(max_length=20,choices=CategoryChoices.choices)
+    product_description= models.TextField()
+    product_price= models.CharField(max_length=20)
+    del_price=models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.product_name
     

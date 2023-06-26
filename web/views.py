@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,get_user_model,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from .models import Contact,Testimonial,Blog
+from .models import Contact,Testimonial,Blog,Product
 
 
 
@@ -81,14 +81,17 @@ def contact(request):
     return render(request, "web/contact.html")
 
 def shop (request):
-    context={"is_shop": True}
+    context={"is_shop": True,'product':Product.objects.all(),}
     return render (request,'web/shop.html',context)
 
 
 
-# def blog_detail (request):
-#     context={}
-#     return render(request,'web/blog-detail.html',context)
+def product_detail (request,id):
+    product=Product.objects.get(id=id)
+    context={
+        'product':product,
+    }
+    return render(request,'web/product-detail.html',context)
 
 def blog_detail(request,id):
     blog=Blog.objects.get(id=id)
@@ -96,3 +99,5 @@ def blog_detail(request,id):
         'blog':blog,
     }
     return render(request,"web/blog-detail.html",context)
+
+

@@ -54,6 +54,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+VERSATILEIMAGEFIELD_SETTINGS = {
+	'cache_length': 2592000,
+	'cache_name': 'versatileimagefield_cache',
+	'jpeg_resize_quality': 70,
+	'sized_directory_name': '_sized_',
+	'filtered_directory_name': '_filtered_',
+	'placeholder_directory_name': '_placeholder_',
+	'create_images_on_demand': True,
+	'image_key_post_processor': None,
+	'progressive_jpeg':False
+}
 
 ROOT_URLCONF = 'fastkart.urls'
 
