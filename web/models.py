@@ -1,6 +1,8 @@
 from django.db import models
 from versatileimagefield.fields import VersatileImageField,PPOIField
+from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+import uuid
 # Create your models here.
 
 
@@ -13,32 +15,7 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.firstname
-    
-    
-
-
-# Create your models here.
-
-
-
-# class Product(models.Model):
-#     LANG_CHOICES = (
-#         ('English', 'English'),
-#         ('Malayalam', 'Malayalam'),
-#         ('Arabic', 'Arabic'),
-#     )
-#     language = models.CharField(max_length=50, choices=LANG_CHOICES)
-#     author=models.CharField(max_length=50)
-#     name=models.CharField(max_length=50)
-#     price=models.FloatField()
-#     year=models.IntegerField()
-#     image=models.ImageField(upload_to="")
-#     publisher=models.CharField(max_length=50)
-#     pdf= models.FileField(upload_to="pdf")
-    
-#     def _str_(self):
-#         return self.name 
-    
+       
     
 class Testimonial (models.Model):
     name =models.CharField(max_length=50)
@@ -85,3 +62,24 @@ class Product (models.Model):
     def __str__(self):
         return self.product_name
     
+    
+    
+
+    
+class Cart (models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    completed=models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.id
+    
+    
+class CartItem(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name='items')
+    cart=models.ForeignKey(Cart,on_delete=models.CASCADE,related_name="cartitems")
+    quantity=models.IntegerField(default=0)
+    
+    
+    def __str__(self):
+        return self.product.product_name

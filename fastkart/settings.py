@@ -43,7 +43,9 @@ INSTALLED_APPS = [
 
 
     'web',
+    'cart'
 ]
+CART_SESSION_ID = 'cart'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate,login,get_user_model,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Contact,Testimonial,Blog,Product
+from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
 
 
 
@@ -99,5 +101,56 @@ def blog_detail(request,id):
         'blog':blog,
     }
     return render(request,"web/blog-detail.html",context)
+
+
+# def Cart (request):
+#     context = {"is_cart": True}
+    
+#     return render(request, "web/cart.html", context)
+
+
+
+@login_required(login_url="web:login")
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("home")
+
+
+@login_required(login_url="web:login")
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="web:login")
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="web:login")
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="web:login")
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required(login_url="web:login")
+def cart_detail(request):
+    return render(request, 'web/cart_detail.html')
 
 
